@@ -29,3 +29,7 @@ PRODUCT_BUILD_PROP_OVERRIDES += \
     DeviceProduct=CPH2585 \
     SystemDevice=OP5D35L1 \
     SystemName=CPH2585
+
+BUILD_BCR := true
+WITH_GMS := true
+TARGET_HAS_UDFPS := true
