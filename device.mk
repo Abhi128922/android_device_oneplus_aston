@@ -94,3 +94,20 @@ $(call inherit-product, device/oneplus/sm8550-common/common.mk)
 
 # Inherit from the proprietary files makefile.
 $(call inherit-product, vendor/oneplus/aston/aston-vendor.mk)
+
+# OPlus Camera (global 12R stack)
+$(call inherit-product-if-exists, vendor/oplus/camera/camera-vendor.mk)
+
+# APS P010 over-walk fix (GOT-interposer loaded into com.oplus.camera via libAlgoProcess.so
+# DT_NEEDED — see device/oneplus/astonc/apsfixup + extract-files.py .add_needed).
+PRODUCT_PACKAGES += \
+    libapsfixup
+
+# OPLUS Fusion Light Sensor
+$(call inherit-product-if-exists, vendor/oneplus/fusion/fusion-vendor.mk)
+
+
+
+BYPASS_CHARGE_SUPPORTED := true
+>>>>>>> a3efc29 (Evox-ify)
+>>>>>>> 5f3a078 (Evox-ify)
