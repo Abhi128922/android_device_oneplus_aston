@@ -14,7 +14,7 @@ $(call inherit-product, device/oneplus/aston/device.mk)
 # Inherit some common Lineage stuff.
 $(call inherit-product, vendor/lineage/config/common_full_phone.mk)
 
-# Lunaris-Specific Flags
+# Evolution-Specific Flags
 PRODUCT_NO_CAMERA:= false
 TARGET_BOOT_ANIMATION_RES := 1080
 TARGET_DISABLE_EPPE := true
@@ -44,5 +44,3 @@ PRODUCT_BUILD_PROP_OVERRIDES += \
     DeviceProduct=CPH2585 \
     SystemDevice=OP5D35L1 \
     SystemName=CPH2585
-
-$(call inherit-product, vendor/lunaris-priv/keys/keys.mk)
