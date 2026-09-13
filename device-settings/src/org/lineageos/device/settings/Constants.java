@@ -67,7 +67,6 @@ public class Constants {
             = "org.lineageos.device.settings.UPDATE_SLIDER_SETTINGS";
     public static final String EXTRA_SLIDER_POSITION = "position";
     public static final String EXTRA_SLIDER_POSITION_VALUE = "position_value";
-    public static final String EXTRA_SLIDER_PACKAGE = "package";
 
     public static final int MODE_TOTAL_SILENCE = 600;
     public static final int MODE_ALARMS_ONLY = 601;
@@ -86,8 +85,6 @@ public class Constants {
     public static final int MODE_ROTATION_0 = 641;
     public static final int MODE_ROTATION_90 = 642;
     public static final int MODE_ROTATION_270 = 643;
-    // Must match MODE_APP_LAUNCH in SystemUI TriStateUiControllerImpl
-    public static final int MODE_APP_LAUNCH = 650;
 
     // Holds <preference_key> -> <proc_node> mapping
     public static final Map<String, String> sBooleanNodePreferenceMap = new HashMap<>();
