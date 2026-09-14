@@ -21,9 +21,13 @@ PRODUCT_BRAND := OnePlus
 PRODUCT_MODEL := CPH2585
 
 # Infinity specific flags
-INFINITY_MAINTAINER := "Franklin"
+INFINITY_MAINTAINER := "Abhijithjolly"
 TARGET_HAS_UDFPS := true
 WITH_GAPPS := true
+
+$(call inherit-product, vendor/lineage-priv/keys/keys.mk)
+#$(call inherit-product, packages/apps/LunarisDolby/dolby.mk)
+$(call inherit-product, vendor/bcr/bcr.mk)
 
 PRODUCT_GMS_CLIENTID_BASE := android-oneplus
 
