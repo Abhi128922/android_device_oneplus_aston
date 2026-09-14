@@ -32,10 +32,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import com.android.axion.compose.preferences.ClickablePreference
-import com.android.axion.compose.preferences.CustomSeekBar
+import com.android.axion.compose.preferences.SliderPreference
 import com.android.axion.compose.preferences.ListPreference
 import com.android.axion.compose.preferences.PreferenceGroup
 import com.android.axion.compose.preferences.SwitchPreference
+import kotlin.math.roundToInt
 import org.lineageos.device.settings.Constants
 import org.lineageos.device.settings.R
 import org.lineageos.device.settings.gamebar.GameBar
@@ -363,73 +364,108 @@ fun GameBarSettingsScreen(contentPadding: PaddingValues) {
                 )
             }
             item {
-                CustomSeekBar(
+                SliderPreference(
                     title = stringResource(R.string.game_bar_text_size),
-                    value = textSize,
-                    onValueChange = {
-                        textSize = it
-                        persistInt("game_bar_text_size", it)
-                        gameBar.updateTextSize(it)
+                    summary = "",
+                    value = textSize.toFloat(),
+                    onValueChange = { newValue ->
+                        textSize = newValue.roundToInt().coerceIn(10, 24)
+                        persistInt("game_bar_text_size", textSize)
+                        gameBar.updateTextSize(textSize)
                     },
-                    min = 10,
-                    max = 24,
-                    defaultValue = 16,
+                    onValueChangeFinished = {},
+                    valueRange = 10f..24f,
+                    steps = 13,
+                    displayValue = textSize.toString(),
+                    onReset = {
+                        textSize = 16
+                        persistInt("game_bar_text_size", textSize)
+                        gameBar.updateTextSize(textSize)
+                    },
                 )
             }
             item {
-                CustomSeekBar(
+                SliderPreference(
                     title = stringResource(R.string.game_bar_background_alpha),
-                    value = bgAlpha,
-                    onValueChange = {
-                        bgAlpha = it
-                        persistInt("game_bar_background_alpha", it)
-                        gameBar.updateBackgroundAlpha(it)
+                    summary = "",
+                    value = bgAlpha.toFloat(),
+                    onValueChange = { newValue ->
+                        bgAlpha = newValue.roundToInt().coerceIn(0, 255)
+                        persistInt("game_bar_background_alpha", bgAlpha)
+                        gameBar.updateBackgroundAlpha(bgAlpha)
                     },
-                    min = 0,
-                    max = 255,
-                    defaultValue = 128,
+                    onValueChangeFinished = {},
+                    valueRange = 0f..255f,
+                    steps = 254,
+                    displayValue = bgAlpha.toString(),
+                    onReset = {
+                        bgAlpha = 128
+                        persistInt("game_bar_background_alpha", bgAlpha)
+                        gameBar.updateBackgroundAlpha(bgAlpha)
+                    },
                 )
             }
             item {
-                CustomSeekBar(
+                SliderPreference(
                     title = stringResource(R.string.game_bar_corner_radius),
-                    value = corner,
-                    onValueChange = {
-                        corner = it
-                        persistInt("game_bar_corner_radius", it)
-                        gameBar.updateCornerRadius(it)
+                    summary = "",
+                    value = corner.toFloat(),
+                    onValueChange = { newValue ->
+                        corner = newValue.roundToInt().coerceIn(0, 32)
+                        persistInt("game_bar_corner_radius", corner)
+                        gameBar.updateCornerRadius(corner)
                     },
-                    min = 0,
-                    max = 32,
-                    defaultValue = 16,
+                    onValueChangeFinished = {},
+                    valueRange = 0f..32f,
+                    steps = 31,
+                    displayValue = corner.toString(),
+                    onReset = {
+                        corner = 16
+                        persistInt("game_bar_corner_radius", corner)
+                        gameBar.updateCornerRadius(corner)
+                    },
                 )
             }
             item {
-                CustomSeekBar(
+                SliderPreference(
                     title = stringResource(R.string.game_bar_padding),
-                    value = padding,
-                    onValueChange = {
-                        padding = it
-                        persistInt("game_bar_padding", it)
-                        gameBar.updatePadding(it)
+                    summary = "",
+                    value = padding.toFloat(),
+                    onValueChange = { newValue ->
+                        padding = newValue.roundToInt().coerceIn(4, 24)
+                        persistInt("game_bar_padding", padding)
+                        gameBar.updatePadding(padding)
                     },
-                    min = 4,
-                    max = 24,
-                    defaultValue = 12,
+                    onValueChangeFinished = {},
+                    valueRange = 4f..24f,
+                    steps = 19,
+                    displayValue = padding.toString(),
+                    onReset = {
+                        padding = 12
+                        persistInt("game_bar_padding", padding)
+                        gameBar.updatePadding(padding)
+                    },
                 )
             }
             item {
-                CustomSeekBar(
+                SliderPreference(
                     title = stringResource(R.string.game_bar_item_spacing),
-                    value = spacing,
-                    onValueChange = {
-                        spacing = it
-                        persistInt("game_bar_item_spacing", it)
-                        gameBar.updateItemSpacing(it)
+                    summary = "",
+                    value = spacing.toFloat(),
+                    onValueChange = { newValue ->
+                        spacing = newValue.roundToInt().coerceIn(0, 16)
+                        persistInt("game_bar_item_spacing", spacing)
+                        gameBar.updateItemSpacing(spacing)
                     },
-                    min = 0,
-                    max = 16,
-                    defaultValue = 8,
+                    onValueChangeFinished = {},
+                    valueRange = 0f..16f,
+                    steps = 15,
+                    displayValue = spacing.toString(),
+                    onReset = {
+                        spacing = 8
+                        persistInt("game_bar_item_spacing", spacing)
+                        gameBar.updateItemSpacing(spacing)
+                    },
                 )
             }
             item {
@@ -593,3 +629,4 @@ fun GameBarSettingsScreen(contentPadding: PaddingValues) {
         )
     }
 }
+

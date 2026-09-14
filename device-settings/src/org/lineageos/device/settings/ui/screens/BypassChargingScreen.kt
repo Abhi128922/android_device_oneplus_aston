@@ -17,9 +17,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import com.android.axion.compose.preferences.ClickablePreference
-import com.android.axion.compose.preferences.CustomSeekBar
+import com.android.axion.compose.preferences.SliderPreference
 import com.android.axion.compose.preferences.PreferenceGroup
 import com.android.axion.compose.preferences.SwitchPreference
+import kotlin.math.roundToInt
 import org.lineageos.device.settings.Constants
 import org.lineageos.device.settings.R
 import org.lineageos.device.settings.bypasschrg.BypassChargingController
@@ -84,19 +85,25 @@ fun BypassChargingScreen(contentPadding: PaddingValues) {
                 )
             }
             item {
-                CustomSeekBar(
+                SliderPreference(
                     title = stringResource(R.string.bypass_charging_target_title),
-                    value = target,
-                    onValueChange = { value ->
-                        if (value in Constants.BYPASS_TARGET_MIN..Constants.BYPASS_TARGET_MAX) {
-                            controller.bypassChargingTarget = value
-                            target = value
+                    summary = "",
+                    value = target.toFloat(),
+                    onValueChange = { newValue ->
+                        val intValue = newValue.roundToInt()
+                        if (intValue in Constants.BYPASS_TARGET_MIN..Constants.BYPASS_TARGET_MAX) {
+                            controller.bypassChargingTarget = intValue
+                            target = intValue
                         }
                     },
-                    min = Constants.BYPASS_TARGET_MIN,
-                    max = Constants.BYPASS_TARGET_MAX,
-                    defaultValue = Constants.BYPASS_TARGET_DEFAULT,
-                    formatValue = { "$it%" },
+                    onValueChangeFinished = {},
+                    valueRange = Constants.BYPASS_TARGET_MIN.toFloat()..Constants.BYPASS_TARGET_MAX.toFloat(),
+                    steps = (Constants.BYPASS_TARGET_MAX - Constants.BYPASS_TARGET_MIN - 1).coerceAtLeast(0),
+                    displayValue = "$target%",
+                    onReset = {
+                        controller.bypassChargingTarget = Constants.BYPASS_TARGET_DEFAULT
+                        target = Constants.BYPASS_TARGET_DEFAULT
+                    },
                 )
             }
         }
@@ -153,3 +160,4 @@ fun BypassChargingScreen(contentPadding: PaddingValues) {
         )
     }
 }
+
