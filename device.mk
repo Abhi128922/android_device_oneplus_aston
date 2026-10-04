@@ -9,7 +9,7 @@ PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 
 # Dalvik — 12R (aston) has 8GB RAM
-$(call inherit-product, frameworks/native/build/phone-xhdpi-8192-dalvik-heap.mk)
+$(call inherit-product, frameworks/native/build/phone-xhdpi-6144-dalvik-heap.mk)
 
 # Audio
 PRODUCT_COPY_FILES += \
@@ -34,6 +34,10 @@ PRODUCT_SYSTEM_PROPERTIES += \
 
 $(call soong_config_set,qtidisplay,pxlw_vendor_namespace,vendor/oneplus/aston)
 $(call soong_config_set_bool,qtidisplay,pxlw_hw_iris7,true)
+
+# SurfaceFlinger ADFR & LTPO rates
+$(call soong_config_set_bool,surfaceflinger,supports_oplus_adfr,true)
+$(call soong_config_set_bool,surfaceflinger,arr_use_oplus_ltpo_rates,true)
 
 # Fingerprint
 TARGET_HAS_UDFPS := true
@@ -67,9 +71,8 @@ PRODUCT_PACKAGES += \
     OPlusSystemUIResTarget \
     OPlusWifiResTarget
 
-# Power — FQ module name: lineage-libperfmgr lives in its own soong namespace and
-# cannot resolve bare "power-ext-oplus" (that module is under hardware/oplus).
-$(call soong_config_set,power_libperfmgr,mode_extension_lib,//hardware/oplus:power-ext-oplus)
+# Power
+$(call soong_config_set,power_libperfmgr,mode_extension_lib,//$(LOCAL_PATH):libperfmgr-ext-aston)
 
 # Regional properties
 PRODUCT_COPY_FILES += \
@@ -122,3 +125,10 @@ PRODUCT_PACKAGES += \
 
 # OPLUS Fusion Light Sensor
 $(call inherit-product, vendor/oneplus/fusion/fusion-vendor.mk)
+PRODUCT_PRODUCT_PROPERTIES += \
+    persist.ascp.fusion_light=1
+
+
+# BCR (Basic Call Recorder)
+$(call inherit-product-if-exists, vendor/bcr/bcr.mk)
+

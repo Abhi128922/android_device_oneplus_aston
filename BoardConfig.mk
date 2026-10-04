@@ -1,10 +1,11 @@
 #
-# Copyright (C) 2021-2025 The LineageOS Project
+# Copyright (C) 2021-2026 The LineageOS Project
 #
 # SPDX-License-Identifier: Apache-2.0
 #
 
-# OPlus camera ships some non-namespaced vendor props
+# Build flags
+BUILD_BROKEN_DUP_RULES := true
 BUILD_BROKEN_VENDOR_PROPERTY_NAMESPACE := true
 
 # Partitions
@@ -16,7 +17,7 @@ include device/oneplus/sm8550-common/BoardConfigCommon.mk
 DEVICE_PATH := device/oneplus/aston
 
 # Assert
-TARGET_OTA_ASSERT_DEVICE := OP5D35L1
+TARGET_OTA_ASSERT_DEVICE := OP5D35L1,aston,CPH2609,CPH2585
 
 ifeq ($(TARGET_USES_PREBUILT_DTB), true)
   BOARD_INCLUDE_DTB_IN_BOOTIMG :=

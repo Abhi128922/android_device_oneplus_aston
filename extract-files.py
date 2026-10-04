@@ -18,6 +18,7 @@ from extract_utils.main import (
 )
 
 namespace_imports = [
+    'device/oneplus/aston',
     'hardware/oplus',
     'hardware/pixelworks/interfaces',
     'hardware/qcom-caf/sm8550',
@@ -36,7 +37,6 @@ lib_fixups: lib_fixups_user_type = {
     **lib_fixups,
     (
         'libhwconfigurationutil',
-        'vendor.oplus.hardware.cammidasservice-V1-ndk',
     ): lib_fixup_vendor_suffix,
 }
 
