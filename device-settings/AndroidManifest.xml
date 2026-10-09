@@ -98,9 +98,11 @@
             android:exported="true" />
 
         <receiver android:name=".Startup"
-            android:exported="false">
+            android:exported="true">
             <intent-filter>
                 <action android:name="lineageos.intent.action.INITIALIZE_LINEAGE_HARDWARE" />
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
             </intent-filter>
         </receiver>
 

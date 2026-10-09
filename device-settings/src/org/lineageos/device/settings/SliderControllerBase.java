@@ -103,12 +103,15 @@ public abstract class SliderControllerBase {
         return ret;
     }
 
+    private static final String TOUCHSCREEN_GESTURE_HAPTIC_FEEDBACK =
+            "touchscreen_gesture_haptic_feedback";
+
     private void doHapticFeedback() {
         if (mVibrator == null) {
             return;
         }
         boolean enabled = Settings.System.getIntForUser(mContext.getContentResolver(),
-                Settings.System.TOUCHSCREEN_GESTURE_HAPTIC_FEEDBACK, 1, UserHandle.USER_CURRENT) != 0;
+                TOUCHSCREEN_GESTURE_HAPTIC_FEEDBACK, 1, UserHandle.USER_CURRENT) != 0;
         if (enabled) {
             mVibrator.vibrate(50);
         }

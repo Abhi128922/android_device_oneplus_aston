@@ -75,6 +75,7 @@ public class DeviceSettingsService extends Service {
     // ===== Initialization =====
 
     private void initializeSubsystems() {
+        initializeSlider();
         initializeBypassCharging();
         initializeFastCharge();
         initializePwm();
@@ -82,6 +83,16 @@ public class DeviceSettingsService extends Service {
         initializeTestTe();
         initializeGameBar();
         initializeRefreshRate();
+    }
+
+    private void initializeSlider() {
+        if (Constants.DEBUG) Log.i(TAG, "Initializing Alert Slider");
+        try {
+            DeviceSettings.restoreSliderStates(this);
+            if (Constants.DEBUG) Log.i(TAG, "Alert Slider initialized");
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to initialize Alert Slider", e);
+        }
     }
 
     private void initializeBypassCharging() {
