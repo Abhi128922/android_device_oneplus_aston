@@ -133,3 +133,9 @@ PRODUCT_PRODUCT_PROPERTIES += \
 # BCR (Basic Call Recorder)
 $(call inherit-product-if-exists, vendor/bcr/bcr.mk)
 
+# Lindroid
+$(call inherit-product-if-exists, vendor/lindroid/lindroid.mk)
+
+# VINTF — bypass kernel FCM check for Lindroid SYSVIPC requirement
+PRODUCT_OTA_ENFORCE_VINTF_KERNEL_REQUIREMENTS := false
+
