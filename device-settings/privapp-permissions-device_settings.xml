@@ -16,6 +16,7 @@
 
 <permissions>
     <privapp-permissions package="org.lineageos.device.settings">
-        <permission name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+        <permission name="android.permission.INJECT_EVENTS"/>
+        <permission name="android.permission.PACKAGE_USAGE_STATS"/>
     </privapp-permissions>
 </permissions>
