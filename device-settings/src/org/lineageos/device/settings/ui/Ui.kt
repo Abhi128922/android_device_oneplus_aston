@@ -30,6 +30,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import com.android.axion.compose.preferences.ClickablePreference
+import com.android.axion.compose.preferences.SliderPreference
 import org.lineageos.device.settings.ui.picker.RadioChoiceDialog
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.graphics.painter.BitmapPainter
@@ -174,4 +175,35 @@ internal fun appLabel(context: Context, packageName: String): String {
     } catch (_: PackageManager.NameNotFoundException) {
         ""
     }
+}
+
+
+@Composable
+fun CustomSeekBar(
+    title: String,
+    value: Int,
+    onValueChange: (Int) -> Unit,
+    min: Int,
+    max: Int,
+    defaultValue: Int,
+    summary: String = "",
+    formatValue: ((Int) -> String)? = null,
+    enabled: Boolean = true,
+    modifier: Modifier = Modifier,
+) {
+    val displayStr = formatValue?.invoke(value) ?: value.toString()
+    val steps = if (max - min > 1) max - min - 1 else 0
+    SliderPreference(
+        title = title,
+        summary = summary,
+        value = value.toFloat(),
+        onValueChange = { onValueChange(it.toInt()) },
+        onValueChangeFinished = {},
+        valueRange = min.toFloat()..max.toFloat(),
+        steps = steps,
+        displayValue = displayStr,
+        enabled = enabled,
+        modifier = modifier,
+        onReset = { onValueChange(defaultValue) },
+    )
 }
