@@ -125,3 +125,8 @@ PRODUCT_PACKAGES += \
 
 # OPLUS Fusion Light Sensor
 $(call inherit-product, vendor/oneplus/fusion/fusion-vendor.mk)
+
+# Device Settings (OnePlus Settings)
+PRODUCT_PACKAGES += \
+    DeviceSettings
+

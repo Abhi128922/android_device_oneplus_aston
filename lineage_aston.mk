@@ -31,7 +31,7 @@ PRODUCT_BUILD_PROP_OVERRIDES += \
     SystemName=CPH2585
 
 # AxionOS-Specific Flags
-AXION_MAINTAINER := Franklin
+AXION_MAINTAINER := Abhi
 AXION_PROCESSOR := Snapdragon_8_Gen_2
 PRODUCT_NO_CAMERA:= false
 TARGET_BOOT_ANIMATION_RES := 1080
@@ -49,3 +49,4 @@ TARGET_INCLUDE_AXFX := true
 # Scroll_Optimizer
 persist.sys.perf.scroll_opt = true
 persist.sys.perf.scroll_opt.heavy_app = 2
+
