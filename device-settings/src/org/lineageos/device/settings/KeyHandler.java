@@ -135,6 +135,15 @@ public class KeyHandler implements DeviceKeyHandler {
                 new IntentFilter(Constants.ACTION_UPDATE_SLIDER_SETTINGS));
 
         mInputManager = mContext.getSystemService(InputManager.class);
+
+        // Initialize default controller so mSliderController is never null
+        mSliderController = mNotificationRingerController;
+        mSliderController.update(new int[]{65, 64, 63});
+        try {
+            mSliderController.restoreState(mContext, false);
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to restore initial slider state", e);
+        }
     }
 
     public KeyEvent handleKeyEvent(KeyEvent event) {
@@ -142,11 +151,18 @@ public class KeyHandler implements DeviceKeyHandler {
             return event;
         }
 
-        if (!mInputManager.getInputDevice(event.getDeviceId()).getName().equals("oplus,hall_tri_state_key")) {
+        if (event.getDevice() == null) {
             return event;
         }
 
-        mSliderController.processEvent(mContext);
+        String deviceName = event.getDevice().getName();
+        if (deviceName == null || (!deviceName.equals("oplus,hall_tri_state_key") && !deviceName.equals("oplus,tri-state-key"))) {
+            return event;
+        }
+
+        if (mSliderController != null) {
+            mSliderController.processEvent(mContext);
+        }
 
         return null;
     }

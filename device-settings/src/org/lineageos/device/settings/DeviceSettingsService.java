@@ -82,6 +82,17 @@ public class DeviceSettingsService extends Service {
         initializeTestTe();
         initializeGameBar();
         initializeRefreshRate();
+        initializeSlider();
+    }
+
+    private void initializeSlider() {
+        if (Constants.DEBUG) Log.i(TAG, "Initializing Slider");
+        try {
+            DeviceSettings.restoreSliderStates(this);
+            if (Constants.DEBUG) Log.i(TAG, "Slider initialized");
+        } catch (Exception e) {
+            Log.e(TAG, "Failed to initialize Slider", e);
+        }
     }
 
     private void initializeBypassCharging() {
