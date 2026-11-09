@@ -106,8 +106,3 @@ PRODUCT_PACKAGES += \
 # OPLUS Fusion Light Sensor
 $(call inherit-product-if-exists, vendor/oneplus/fusion/fusion-vendor.mk)
 
-
-
-BYPASS_CHARGE_SUPPORTED := true
->>>>>>> a3efc29 (Evox-ify)
->>>>>>> 5f3a078 (Evox-ify)
